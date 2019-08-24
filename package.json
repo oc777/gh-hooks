@@ -1,0 +1,38 @@
+{
+  "name": "oc222ba-examination-3",
+  "version": "1.0.0",
+  "description": "1DV023 exam 3",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "devstart": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1dv023/oc222ba-examination-3.git"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "Olga Christensen oc222ba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1dv023/oc222ba-examination-3/issues"
+  },
+  "homepage": "https://github.com/1dv023/oc222ba-examination-3#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "body-parser": "^1.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "standard": "*"
+  },
+  "nodemonConfig": {
+    "ext": "js,json,hbs,html,css"
+  }
+}
