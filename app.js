@@ -71,6 +71,9 @@ io.on('connection', (socket) => {
     //console.log(data)
     socket.emit('issue', data)
   })
+  webhookHandler.on('issue_comment', function (repo, data) {
+    socket.emit('issue_comment', data)
+  })
   webhookHandler.on('push', function (repo, data) {
     //console.log('push')
     //console.log(data)
