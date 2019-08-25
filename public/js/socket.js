@@ -30,7 +30,7 @@ let renderUI = (data) => {
   let actionTxt = data.action || ('Pusher: ' + data.pusher.name)
   let action = document.createTextNode(actionTxt)
 
-  let bodyTxt = data.label.name || data.issue.body || ''
+  let bodyTxt = (data.issue) ? ((data.label.name) ? data.label.name : data.issue.body ) : ''
   let body = document.createTextNode(bodyTxt)
 
   eventTitle.appendChild(title)
