@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // setup webhook handler
-const webhookHandler = webhook({ path: '/payload', secret: 'VerySecretStuff' });
+const webhookHandler = webhook({ path: '/', secret: 'VerySecretStuff' });
 app.use(webhookHandler)
 
 // setup session
@@ -65,18 +65,16 @@ app.use((req, res, next) => {
 
 io.on('connection', (socket) => {
   console.log('connected');
-  webhookHandler.on('*', function (event, repo, data) {
-    console.log(event)
+  
+  webhookHandler.on('issues', function (repo, data) {
+    console.log('issues')
     console.log(data)
-
-    if (event === 'issues') {
-      socket.emit('issue')
-    }
-    if (event === 'push') {
-      socket.emit('push')
-    }
-
-    
+    socket.emit('issue')
+  })
+  webhookHandler.on('push', function (repo, data) {
+    console.log('push')
+    console.log(data)
+    socket.emit('push')
   })
 })
 
