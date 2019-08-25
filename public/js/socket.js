@@ -34,6 +34,6 @@ let renderUI = (event, data) => {
   div.appendChild(eventAction)
   div.appendChild(eventBody)
 
-  let body = document.getElementsByTagName("BODY")[0]
-  body.appendChild(div)
+  let htmlbody = document.getElementsByTagName("BODY")[0]
+  htmlbody.appendChild(div)
 }
