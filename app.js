@@ -5,12 +5,25 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
 const path = require('path')
+const webhook = require('express-github-webhook');
+const https = require('https')
+
 
 const app = express()
 const port = process.env.PORT || 3000
+const server = https.createServer(app)
+
+let io = require('socket.io')(server)
+
 
 // Parse application/x-www-form-urlencoded.
 app.use(bodyParser.urlencoded({ extended: true }))
+// Support JSON 
+app.use(bodyParser.json())
+
+// setup webhook handler
+const webhookHandler = webhook({ path: '/payload', secret: 'VerySecretStuff' });
+app.use(webhookHandler)
 
 // setup session
 const sessionOptions = {
@@ -46,6 +59,25 @@ app.use((req, res, next) => {
   res.locals.flash = req.session.flash
   delete req.session.flash
   next()
+})
+
+
+
+io.on('connection', (socket) => {
+  console.log('connected');
+  webhookHandler.on('*', function (event, repo, data) {
+    console.log(event)
+    console.log(data)
+
+    if (event === 'issues') {
+      socket.emit('issue')
+    }
+    if (event === 'push') {
+      socket.emit('push')
+    }
+
+    
+  })
 })
 
 // routes
@@ -87,6 +119,6 @@ app.use((err, req, res, next) => {
 })
 
 // Start listening.
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Listening on port ${port}`)
 })

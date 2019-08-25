@@ -26,3 +26,5 @@ pids
 *.pid
 *.seed
 *.pid.lock
+
+ssh/

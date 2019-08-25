@@ -23,10 +23,12 @@
   },
   "homepage": "https://github.com/1dv023/oc222ba-examination-3#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "express-github-webhook": "^1.0.6",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
-    "body-parser": "^1.18.2"
+    "socket.io": "^2.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1",
