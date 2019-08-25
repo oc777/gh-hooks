@@ -67,14 +67,14 @@ io.on('connection', (socket) => {
   console.log('connected');
   
   webhookHandler.on('issues', function (repo, data) {
-    console.log('issues')
-    console.log(data)
-    socket.emit('issue')
+    //console.log('issues')
+    //console.log(data)
+    socket.emit('issue', data)
   })
   webhookHandler.on('push', function (repo, data) {
-    console.log('push')
-    console.log(data)
-    socket.emit('push')
+    //console.log('push')
+    //console.log(data)
+    socket.emit('push', data)
   })
 })
 
