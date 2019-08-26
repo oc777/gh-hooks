@@ -40,7 +40,11 @@ span + span {
     background: rgb(191, 230, 182);
     color: green;
 }
-.payload {
-    background: rgb(201, 201, 201);
-    margin: 20px auto;
+.payload > div {
+    background: rgb(227, 227, 227);
+    padding: 15px;
+}
+.issue {
+    background: rgb(224, 233, 177);
+    padding: 15px;
 }
