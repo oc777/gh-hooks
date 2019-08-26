@@ -1,4 +1,4 @@
-let socket = io()
+const socket = io()
 
 socket.on('issue', (data) => {
   console.log('CLIENT issue')
@@ -16,39 +16,45 @@ socket.on('push', (data) => {
   renderUI('push', data)
 })
 
-let renderUI = (event, data) => {
-  let div = document.createElement('div')
-  div.setAttribute('class', 'payload')
+const renderUI = (event, data) => {
+  const div = document.createElement('div')
 
-  let eventTitle = document.createElement('h2')
-  let eventAction = document.createElement('p')
+  const eventHeading = document.createElement('h2')
+  const eventAction = document.createElement('p')
+  const eventTitle = document.createElement('p')
 
-  let titleTxt, actionTxt
+  let titleTxt, actionTxt, headingTxt
 
   if (event === 'issue') {
-    titleTxt = 'Issue'
+    headingTxt = 'Issue'
     actionTxt = data.action
+    titleTxt = data.issue.title
   }
 
   if (event === 'issue_comment') {
-    titleTxt = 'Issue Comment'
+    headingTxt = 'Issue Comment'
     actionTxt = data.action
+    titleTxt = data.issue.title
   }
 
   if (event === 'push') {
-    titleTxt = 'Push'
+    headingTxt = 'Push'
     actionTxt = 'Pusher: ' + data.pusher.name
+    titleTxt = ''
   }
 
-  let title = document.createTextNode(titleTxt)
-  let action = document.createTextNode(actionTxt)
+  const heading = document.createTextNode(headingTxt)
+  const title = document.createTextNode(titleTxt)
+  const action = document.createTextNode(actionTxt)
 
-  eventTitle.appendChild(title)
+  eventHeading.appendChild(heading)
   eventAction.appendChild(action)
+  eventTitle.appendChild(title)
 
-  div.appendChild(eventTitle)
+  div.appendChild(eventHeading)
   div.appendChild(eventAction)
+  div.appendChild(eventTitle)
 
-  let htmlbody = document.getElementsByTagName("BODY")[0]
-  htmlbody.prepend(div)
+  const parent = document.getElementsByClassName('PAYLOAD')[0]
+  parent.prepend(div)
 }

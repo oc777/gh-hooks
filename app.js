@@ -1,28 +1,27 @@
 'use strict'
 
+require('dotenv').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
 const path = require('path')
-const webhook = require('express-github-webhook');
+const webhook = require('express-github-webhook')
 const http = require('http')
-
 
 const app = express()
 const port = process.env.PORT || 3000
 const server = http.createServer(app)
 
-let io = require('socket.io')(server)
-
+const io = require('socket.io')(server)
 
 // Parse application/x-www-form-urlencoded.
 app.use(bodyParser.urlencoded({ extended: true }))
-// Support JSON 
+// Support JSON
 app.use(bodyParser.json())
 
 // setup webhook handler
-const webhookHandler = webhook({ path: '/', secret: 'VerySecretStuff' });
+const webhookHandler = webhook({ path: '/', secret: process.env.WEBHOOK_SECRET })
 app.use(webhookHandler)
 
 // setup session
@@ -61,22 +60,20 @@ app.use((req, res, next) => {
   next()
 })
 
-
-
 io.on('connection', (socket) => {
-  console.log('connected');
-  
+  console.log('connected')
+
   webhookHandler.on('issues', function (repo, data) {
-    //console.log('issues')
-    //console.log(data)
+    // console.log('issues')
+    // console.log(data)
     socket.emit('issue', data)
   })
   webhookHandler.on('issue_comment', function (repo, data) {
     socket.emit('issue_comment', data)
   })
   webhookHandler.on('push', function (repo, data) {
-    //console.log('push')
-    //console.log(data)
+    // console.log('push')
+    // console.log(data)
     socket.emit('push', data)
   })
 })
