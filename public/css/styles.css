@@ -43,8 +43,10 @@ span + span {
 .payload > div {
     background: rgb(227, 227, 227);
     padding: 15px;
+    margin: 20px;
 }
 .issue {
     background: rgb(224, 233, 177);
     padding: 15px;
+    margin: 20px;
 }
