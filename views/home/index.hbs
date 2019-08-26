@@ -1,7 +1,23 @@
-<h1></h1>
+<h1>1dv023/oc222ba-examination-3</h1>
 <div class="issues">
-    
+    {{#if locals.issues.length }}
+        {{#each locals.issues}}
+            <div class="issue">
+                <div>
+                    <span>url: {{this.url}}</span>
+                </div>
+                <div>
+                    <span>title: {{this.title}}</span>
+                </div>
+                <div>
+                    <span>state: {{this.state}}</span>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>no issues</p>
+    {{/if}}
 </div>
 <div class="payload">
-    
+
 </div>
