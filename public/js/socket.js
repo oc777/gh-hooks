@@ -55,6 +55,6 @@ const renderUI = (event, data) => {
   div.appendChild(eventAction)
   div.appendChild(eventTitle)
 
-  const parent = document.getElementsByClassName('PAYLOAD')[0]
+  const parent = document.getElementsByClassName('payload')[0]
   parent.prepend(div)
 }
