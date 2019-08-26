@@ -1,5 +1,6 @@
 const socket = io()
 
+// render UI when events are pushed from the server
 socket.on('issue', (data) => {
   console.log('CLIENT issue')
   console.log(data)
@@ -16,6 +17,7 @@ socket.on('push', (data) => {
   renderUI('push', data)
 })
 
+// DOM rendering
 const renderUI = (event, data) => {
   const div = document.createElement('div')
 

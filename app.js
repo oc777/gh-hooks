@@ -60,20 +60,20 @@ app.use((req, res, next) => {
   next()
 })
 
+// Setup sockets and webhooks
 io.on('connection', (socket) => {
   console.log('connected')
 
+  // pass on issue events to the client
   webhookHandler.on('issues', function (repo, data) {
-    // console.log('issues')
-    // console.log(data)
     socket.emit('issue', data)
   })
+  // pass on issue comments events to the client
   webhookHandler.on('issue_comment', function (repo, data) {
     socket.emit('issue_comment', data)
   })
+  // pass on push events to the client
   webhookHandler.on('push', function (repo, data) {
-    // console.log('push')
-    // console.log(data)
     socket.emit('push', data)
   })
 })
