@@ -8,6 +8,7 @@ const session = require('express-session')
 const path = require('path')
 const webhook = require('express-github-webhook')
 const http = require('http')
+const helmet = require('helmet')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -39,6 +40,16 @@ const sessionOptions = {
 }
 
 app.use(session(sessionOptions))
+
+// use Helmet HTTP headers with default modules enabled
+app.use(helmet())
+
+// and Helmet with CSP enabled
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"]
+  }
+}))
 
 // Configure rendering engine, with change extension to .hbs
 app.engine('hbs', exphbs({
@@ -77,6 +88,12 @@ io.on('connection', (socket) => {
     socket.emit('push', data)
   })
 })
+
+// webhook error handling, e.g. failed to verify signature
+webhookHandler.on('error', function (err, req, res) {
+  console.log(err)
+  //res.status(404)
+});
 
 // routes
 app.use('/', require('./routes/home.js'))
