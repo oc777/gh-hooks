@@ -92,8 +92,8 @@ io.on('connection', (socket) => {
 // webhook error handling, e.g. failed to verify signature
 webhookHandler.on('error', function (err, req, res) {
   console.log(err)
-  //res.status(404)
-});
+  // res.status(404)
+})
 
 // routes
 app.use('/', require('./routes/home.js'))
