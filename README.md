@@ -1,5 +1,19 @@
-# oc222ba-examination-3
+# GitHub Hooks
 
+__Requirements:__
+
+1. When a client connects to the application it will contact GitHub through their [REST API](https://developer.github.com/v3/) and fetch all created issues on your repository. The response will be in JSON, which is good because we work with Node.js.
+
+2. When your application gets the issue list from GitHub, you should use that to render the HTML-page for the client along with the JavaScript needed for the client.		2. When your application gets the issue list from GitHub, you should use that to render the HTML-page for the client along with the JavaScript needed for the client.
+
+3. One thing the client-script needs to do is, for example, the ability to connect to your server´s WebSocket channel.		3. One thing the client-script needs to do is, for example, the ability to connect to your server´s WebSocket channel.
+
+4. When a new "issue-event" happens on GitHub they will fire a (by you) registered HTTP POST which should point to your application.		4. When a new "issue-event" happens on GitHub they will fire a (by you) registered HTTP POST which should point to your application.
+
+5. The webhook will send you data and your application should use the web socket channel(s) to update the client in real-time.		5. The webhook will send you data and your application should use the web socket channel(s) to update the client in real-time.
+
+
+__REPORT:__
 
 **What is the URL to your application?**
 
