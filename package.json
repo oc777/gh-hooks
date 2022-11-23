@@ -31,7 +31,7 @@
     "express-session": "^1.15.6",
     "helmet": "^3.20.0",
     "node-fetch": "^2.6.0",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1",
